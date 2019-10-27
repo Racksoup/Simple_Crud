@@ -28,7 +28,7 @@ class App extends React.Component {
 
   getDogs() {
     axios
-      .get("http://localhost:5000/")
+      .get("/api/dogs")
       .then(res => res.data)
       .then(data => {
         this.setState({ dogs: data });
@@ -49,7 +49,7 @@ class App extends React.Component {
       breed: this.state.breed
     };
 
-    axios.post("/", dog).then(res => {
+    axios.post("/api/dogs", dog).then(res => {
       this.isLoaded();
     });
   }
@@ -57,7 +57,7 @@ class App extends React.Component {
   deleteDog(e, id) {
     e.preventDefault();
     this.setState({ loading: true });
-    axios.delete(`/${id}`).then(res => this.isLoaded());
+    axios.delete(`/api/dogs${id}`).then(res => this.isLoaded());
   }
 
   updateDog() {
@@ -67,7 +67,7 @@ class App extends React.Component {
       name: this.state.name,
       breed: this.state.breed
     };
-    axios.put(`/${id}`, dog).then(res => this.isLoaded());
+    axios.put(`/api/dogs${id}`, dog).then(res => this.isLoaded());
   }
 
   onChange(e) {

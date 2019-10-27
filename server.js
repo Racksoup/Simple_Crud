@@ -14,7 +14,7 @@ mongoose
 	.then(() => console.log("Your Database is Connected"))
 	.catch(err => console.log(err));
 
-app.use("/", require("./routes/api/dogs"));
+app.use("/api/dogs", require("./routes/api/dogs"));
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static("client/build"));
