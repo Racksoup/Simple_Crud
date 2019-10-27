@@ -57,7 +57,7 @@ class App extends React.Component {
   deleteDog(e, id) {
     e.preventDefault();
     this.setState({ loading: true });
-    axios.delete(`/api/dogs${id}`).then(res => this.isLoaded());
+    axios.delete(`/api/dogs/${id}`).then(res => this.isLoaded());
   }
 
   updateDog() {
@@ -67,7 +67,7 @@ class App extends React.Component {
       name: this.state.name,
       breed: this.state.breed
     };
-    axios.put(`/api/dogs${id}`, dog).then(res => this.isLoaded());
+    axios.put(`/api/dogs/${id}`, dog).then(res => this.isLoaded());
   }
 
   onChange(e) {
