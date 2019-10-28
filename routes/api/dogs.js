@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const auth = require("../../middleware/auth");
 
 const Dog = require("../../models/Dog");
 mongoose.set("useFindAndModify", false);
@@ -13,7 +14,7 @@ router.get("/:id", (req, res) => {
 	Dog.findById(req.params.id).then(dog => res.json(dog));
 });
 
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
 	const newDog = new Dog({
 		name: req.body.name,
 		breed: req.body.breed
@@ -21,7 +22,7 @@ router.post("/", (req, res) => {
 	newDog.save().then(dog => res.json(dog));
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", auth, (req, res) => {
 	Dog.findByIdAndUpdate(req.params.id, {
 		name: req.body.name,
 		breed: req.body.breed
@@ -30,7 +31,7 @@ router.put("/:id", (req, res) => {
 	});
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, (req, res) => {
 	Dog.findById(req.params.id).then(dog =>
 		dog.remove().then(() => res.json({ success: true }))
 	);
